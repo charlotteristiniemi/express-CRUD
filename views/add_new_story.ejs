@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Roliga historier</title>
+		<meta charset="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	</head>
+	<body>
+
+		<%- include layouts/header.ejs %>
+
+		<button class="back-btn" onclick="cancelAdd();"><--</button>
+
+		<div class="input-container">
+			<form id="add-form">
+
+				<div class="label">Titel</div>
+				<div class="input-div">
+					<input class="input-tag" type="text" name="title" required>
+				</div>
+				
+				<div class="label">Kategori</div>
+				<div class="input-div">
+					<select class="input-tag" name="categoryid">
+						<% if (data.length) {
+							for (var i = 0 ; i < data.length ; i++ ) { %>
+								<option value="<%=data[i].CategoryID%>"><%=data[i].CategoryName%></option>
+							<% }
+						}
+						else { %>
+							<p>Hittades inga kategorier!</p>
+						<% } %>
+					</select>
+				</div>
+				
+				<div class="label">Historia</div>
+				<div class="input-div">
+					<textarea class="input-tag-text" name="story" required></textarea>
+				</div>
+				
+				<div class="button-div">
+					<button onclick="postStory()">Spara</button>
+				</div>
+				
+			</form>
+		</div>
+
+		<%- include layouts/footer.ejs %>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/sweetalert.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Roliga historier</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+	</head>
+	<body>
+
+	<%- include layouts/header.ejs %>
+
+		<button class="add-new-story-btn" onclick="addNewStory();">+</button>
+
+		<!-- Filtrering, sortering och sökning -->
+		<div class="input-container-startpage">
+			<!-- Filtreringsformulär -->
+			<div class="forms">
+				<form id="filter" role="form" method="POST">
+					<div class="label">Filtrera på kategori</div>
+					<div class="input-div">
+						<select id="select-filter" name="filter">
+							<% if (cData.length) {
+								for (var i = 0 ; i < cData.length ; i++ ) { %>
+									<option value="<%=cData[i].CategoryID%>"><%=cData[i].CategoryName%></option>
+								<% }
+							}
+							else { %>
+								<p>Hittades inga kategorier!</p>
+							<% } %>
+						</select>
+					</div>
+
+					<div class="button-div">
+						<input type="submit" value="Filtrera">
+					</div>
+				</form>
+			</div>
+
+			<!-- Sorteringsformulär -->
+			<div class="forms">
+				<form id="sort" role="form" method="POST">
+					<div class="label">Sortera:</div>
+					<div class="input-div">
+						<select id="select-sort" name="sort">
+							<option value="1">A -> Ö</option>
+							<option value="2">Ö -> A</option>
+							<option value="3">Nyast först</option>
+							<option value="4">Äldst först</option>
+						</select>
+					</div>
+
+					<div class="button-div">
+						<input type="submit" value="Sortera">
+					</div>
+				</form>
+			</div>
+
+			<!-- Sökningsformulär -->
+			<div class="forms">
+				<form id="search" role="form" method="POST">
+					<div class="label">Sök:</div>
+					<div class="input-div">
+						<input id="select-search" type="text" name="search" required>
+					</div>
+
+					<div class="button-div">
+						<input type="submit" value="Sök">
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+		<section>
+			<% if (data.length) { 
+				for (var i = 0 ; i < data.length ; i++ ) { %>
+					<div class="container">
+						<h4><%=data[i].Title%></h4>
+						<p><%=data[i].Content%></p>
+					</div>
+					<button onclick="changeStory(<%=data[i].StoryID%>);">
+						Ändra
+					</button>
+					<button onclick="deleteStory(<%=data[i].StoryID%>);">
+						Ta bort
+					</button>
+				<% }
+	    }
+
+	    else { %>
+	    <p>Hittades inga historier!</p>
+	    <% } %>
+    </section>
+
+		<%- include layouts/footer.ejs %>
+
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+
+	</body>
+</html>
