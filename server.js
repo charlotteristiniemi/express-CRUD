@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 var routes = require('./routes');
 
@@ -17,6 +18,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 // Enable req.body parsing
 server.use(bodyParser.urlencoded({ extended: true })); //support x-www-form-urlencoded
 server.use(bodyParser.json());
+server.use(expressValidator());
 
 server.use(function(req, res, next) {
     console.log(req.method, req.url);

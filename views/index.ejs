@@ -20,6 +20,8 @@
 					<div class="label">Filtrera på kategori</div>
 					<div class="input-div">
 						<select id="select-filter" name="filter">
+							<option value="" selected>Välj kategori</option>
+							<option value="all">Alla</option>
 							<% if (cData.length) {
 								for (var i = 0 ; i < cData.length ; i++ ) { %>
 									<option value="<%=cData[i].CategoryID%>"><%=cData[i].CategoryName%></option>
@@ -43,6 +45,7 @@
 					<div class="label">Sortera:</div>
 					<div class="input-div">
 						<select id="select-sort" name="sort">
+							<option value="" selected>Välj sortering</option>
 							<option value="1">A -> Ö</option>
 							<option value="2">Ö -> A</option>
 							<option value="3">Nyast först</option>
@@ -61,7 +64,7 @@
 				<form id="search" role="form" method="POST">
 					<div class="label">Sök:</div>
 					<div class="input-div">
-						<input id="select-search" type="text" name="search" required>
+						<input id="select-search" type="text" name="search" placeholder="Sök historia..." required>
 					</div>
 
 					<div class="button-div">

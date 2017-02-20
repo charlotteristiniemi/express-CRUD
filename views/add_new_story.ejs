@@ -12,18 +12,21 @@
 		<%- include layouts/header.ejs %>
 
 		<button class="back-btn" onclick="cancelAdd();"><--</button>
-
+		<div class="data-msg">
+		  <ul class="error-list"></ul>
+		</div>
 		<div class="input-container">
 			<form id="add-form">
 
 				<div class="label">Titel</div>
 				<div class="input-div">
-					<input class="input-tag" type="text" name="title" required>
+					<input class="input-tag" type="text" name="title" placeholder="Titel..." required>
 				</div>
 				
 				<div class="label">Kategori</div>
 				<div class="input-div">
 					<select class="input-tag" name="categoryid">
+						<option value="">Välj kategori</option>
 						<% if (data.length) {
 							for (var i = 0 ; i < data.length ; i++ ) { %>
 								<option value="<%=data[i].CategoryID%>"><%=data[i].CategoryName%></option>
@@ -37,7 +40,7 @@
 				
 				<div class="label">Historia</div>
 				<div class="input-div">
-					<textarea class="input-tag-text" name="story" required></textarea>
+					<textarea class="input-tag-text" name="story" placeholder="Historia..." required></textarea>
 				</div>
 				
 				<div class="button-div">

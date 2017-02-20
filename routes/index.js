@@ -1,4 +1,5 @@
 var connection = require('../connection');
+var util = require('util');
 
 connection.connect(); //connect to database
 
@@ -44,7 +45,18 @@ exports.add = function (req, res) {
  */
 
  exports.save = function (req, res) {
- 	
+
+ 	//validation
+  req.assert('title','Titel måste fyllas i, 1-50 bokstäver krävs').len(1, 50);
+  req.assert('categoryid','En kategori måste väljas').notEmpty();
+  req.assert('story','Historiefältet måste fyllas i').notEmpty();
+
+ 	var errors = req.validationErrors();
+  if(errors){
+    res.status(400).json(errors);
+    return;
+  }
+	
  	var input = req.body;
 
  	var data = {
@@ -52,9 +64,6 @@ exports.add = function (req, res) {
  		categoryid: input.categoryid,
  		story 		: input.story
  	};
-
- 	// console.log(input);
- 	// console.log(data);
 
  	connection.query( "INSERT INTO Stories (CategoryID, Title, Content) " +
  		"VALUES ('" + data.categoryid + "', '" + data.title + "', '" + data.story + "');", function (err, row, field) {
@@ -107,6 +116,17 @@ exports.delete = function (req, res) {
 
  exports.update = function (req, res) {
  	
+ 	//validation
+  req.assert('title','Titel måste fyllas i, 1-50 bokstäver krävs').len(1, 50);
+  req.assert('categoryid','En kategori måste väljas').notEmpty();
+  req.assert('story','Historiefältet måste fyllas i').notEmpty();
+
+ 	var errors = req.validationErrors();
+  if(errors){
+    res.status(400).json(errors);
+    return;
+  }
+ 	
  	var input = req.body;
  	var storyid = req.params.id;
 
@@ -154,42 +174,59 @@ exports.filterSortSearch = function (req, res) {
 
 // Filter
 function filter(filterType, res) {
-	
-	connection.query( "SELECT * FROM Stories WHERE CategoryID='" + filterType + "';", function (err1, row1, field1) {
+
+	if (filterType === 'all') {
+
+		connection.query( "SELECT * FROM Stories;", function (err1, row1, field1) {
 	
 		if (err1) console.log(err1);
 	
-		connection.query( 'SELECT * FROM Categories' , function (err2, row2, field2) {
-	
-			if (err2) console.log(err2);
+			connection.query( 'SELECT * FROM Categories' , function (err2, row2, field2) {
+		
+				if (err2) console.log(err2);
 
-			res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+				res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+			});
 		});
-	});
+	}
+	else {
+		connection.query( "SELECT * FROM Stories WHERE CategoryID='" + filterType + "';", function (err1, row1, field1) {
+	
+		if (err1) console.log(err1);
+	
+			connection.query( 'SELECT * FROM Categories' , function (err2, row2, field2) {
+		
+				if (err2) console.log(err2);
+
+				res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+			});
+		});
+	}
 };
 
 // Sort
 function sort(sortType, res) {
 
-	switch (sortType){
-		case 1: 
-			sortType = 'Title ASC';
+	var sortVar = "";
+
+	switch (sortType) {
+		case "1": 
+			sortVar = "Title ASC";
 			break;
-		case 2: 
-			sortType = 'Title DESC';
+		case "2": 
+			sortVar = "Title DESC";
 			break;
-		case 3: 
-			sortType = 'StoryID DESC';
+		case "3": 
+			sortVar = "StoryID DESC";
 			break;
-		case 4: 
-			sortType = 'StoryID ASC';
+		case "4": 
+			sortVar = "StoryID ASC";
 			break;
 		default: 
-			sortType = 'Title ASC';
-			break;
+			sortVar = "StoryID ASC";
 	}
 
-	connection.query( "SELECT * FROM Stories ORDER BY " + sortType + ";", function (err1, row1, field1) {
+	connection.query( "SELECT * FROM Stories ORDER BY " + sortVar + ";", function (err1, row1, field1) {
 	
 		if (err1) console.log(err1);
 	
