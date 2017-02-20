@@ -3,8 +3,9 @@
 	<head>
 		<title>Roliga historier</title>
 		<meta charset="utf-8">
-
 		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<link rel="stylesheet" type="text/css" href="../css/sweetalert.css">
 	</head>
@@ -12,19 +13,19 @@
 
 		<%- include layouts/header.ejs %>
 
-		<button class="back-btn" onclick="cancelAdd();"><--</button>
+		<button class="back-btn" onclick="cancelAdd();"><-</button>
 		<div class="data-msg">
 		  <ul class="error-list"></ul>
 		</div>
 		<div class="input-container">
 			<form id="change-form">
 				
-				<div class="label">Titel</div>
+				<div class="label-add">Titel</div>
 				<div class="input-div">
 					<input class="input-tag" type="text" name="title" required value="<%=data[0].Title%>">
 				</div>
 				
-				<div class="label">Kategori</div>
+				<div class="label-add">Kategori</div>
 				<div class="input-div">
 					<select class="input-tag" name="categoryid">
 						<% if (data.length) {
@@ -44,18 +45,22 @@
 					</select>
 				</div>
 				
-				<div class="label">Historia</div>
+				<div class="label-add">Historia</div>
 				<div class="input-div">
 					<textarea class="input-tag-text" name="story" required value="<%=data[0].Content%>"><%=data[0].Content%></textarea>
 				</div>
 				<div class="button-div">
-					<button onclick="putStory(<%=data[0].StoryID%>)">Uppdatera</button>
+					<button id="change-btn" onclick="putStory(<%=data[0].StoryID%>)">Uppdatera</button>
 				</div>
 				
 			</form>
 		</div>
 
-		<%- include layouts/footer.ejs %>
+		<footer class="footer-bottom">
+			<div class="page-footer">
+				<h1>Taco-hej!</h1>
+			</div>
+		</footer>
 
 		<script src="../js/jquery.min.js"></script>
 		<script src="../js/sweetalert.min.js"></script>

@@ -1,5 +1,4 @@
 
-
 function addNewStory() {
 	window.location.href = '/add_new_story';
 }

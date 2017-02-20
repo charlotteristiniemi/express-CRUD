@@ -18,7 +18,7 @@ exports.home = function (req, res) {
 	
 			if (err2) console.log(err2);
 
-			res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+			res.render('index',{page_title:"Startsida - ", page_text:"Här kan du hitta dom allra bästa roliga historierna!", data:row1, cData:row2});
 		});
 	});
 };
@@ -34,7 +34,7 @@ exports.add = function (req, res) {
 
 		if (err) console.log(err);
 
-		res.render('add_new_story',{page_title:"Lägg till ny rolig historia!", data:row});
+		res.render('add_new_story',{page_title:"Lägg till ny rolig historia!", page_text:"", data:row});
 	
 	});
 };
@@ -89,7 +89,7 @@ exports.edit = function (req, res) {
 	
 			if (err2) console.log(err2);
 
-			res.render('edit_story',{page_title:"Ändra rolig historia!", data:row1, cData:row2});
+			res.render('edit_story',{page_title:"Ändra rolig historia!", page_text:"", data:row1, cData:row2});
 		});
 	});
 };
@@ -185,7 +185,7 @@ function filter(filterType, res) {
 		
 				if (err2) console.log(err2);
 
-				res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+				res.render('index',{page_title:"Startsida - ", page_text:"Här kan du hitta dom allra bästa roliga historierna!", data:row1, cData:row2});
 			});
 		});
 	}
@@ -198,7 +198,7 @@ function filter(filterType, res) {
 		
 				if (err2) console.log(err2);
 
-				res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+				res.render('index',{page_title:"Startsida - ", page_text:"Här kan du hitta dom allra bästa roliga historierna!", data:row1, cData:row2});
 			});
 		});
 	}
@@ -234,7 +234,7 @@ function sort(sortType, res) {
 	
 			if (err2) console.log(err2);
 
-			res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+			res.render('index',{page_title:"Startsida - ", page_text:"Här kan du hitta dom allra bästa roliga historierna!", data:row1, cData:row2});
 		});
 	});
 };
@@ -250,7 +250,7 @@ function search(searchType, res) {
 	
 			if (err2) console.log(err2);
 
-			res.render('index',{page_title:"Startsida", data:row1, cData:row2});
+			res.render('index',{page_title:"Startsida - ", page_text:"Här kan du hitta dom allra bästa roliga historierna!", data:row1, cData:row2});
 		});
 	});
 };
