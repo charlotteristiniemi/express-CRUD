@@ -23,3 +23,6 @@ You need to create a DB named funny. I used MAMP with phpMyAdmin for this.
 ## Access
 
     http://localhost:3000/
+
+NOTE:
+Styling is not responsive. I have a 13" Macbook Pro and used Chrome. If you use another screen with other dimentions/resolutions and not Chrome, styling might be a litte off.
